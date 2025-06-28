@@ -1,0 +1,73 @@
+[package]
+name = "wasm-peers"
+version = "0.4.1"
+authors = ["Tomasz Karwowski <to.karwowski@gmail.com>"]
+rust-version = "1.56.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Easy-to-use wrapper for WebRTC DataChannels peer-to-peer connections written in Rust and compiling to WASM."
+#homepage
+repository = "https://github.com/wasm-peers/wasm-peers"
+keywords = ["wasm", "webrtc", "datachannel", "peer-to-peer", "webassembly"]
+categories = ["wasm", "network-programming", "web-programming"]
+readme = "../README.md"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = [
+    "one-to-one",
+    "one-to-many",
+    "many-to-many",
+    "console_error_panic_hook",
+]
+one-to-one = []
+one-to-many = []
+many-to-many = ["one-to-many"]
+
+[dependencies]
+console_error_panic_hook = { version = "0.1", optional = true }
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+log = "0.4"
+uuid = { version = "1", features = ["v4", "js"] }
+
+wasm-peers-protocol = { path = "../protocol", version = "0.3" }
+anyhow = "1"
+rmp = "0.8.11"
+rmp-serde = "1.1.1"
+
+[dependencies.web-sys]
+version = "0.3.22"
+features = [
+    "console",
+
+    # WebRTC features
+    "MessageEvent",
+    "RtcPeerConnection",
+    "RtcSignalingState",
+    "RtcSdpType",
+    "RtcSessionDescriptionInit",
+    "RtcPeerConnectionIceEvent",
+    "RtcIceConnectionState",
+    "RtcIceCandidate",
+    "RtcIceCandidateInit",
+    "RtcDataChannel",
+    "RtcDataChannelEvent",
+    "RtcDataChannelInit",
+    "RtcConfiguration",
+    "RtcIceGatheringState",
+
+    # Tests
+    "RtcSessionDescription",
+
+    # WebSocket features
+    "WebSocket",
+    "BinaryType",
+]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

@@ -1,0 +1,25 @@
+[package]
+name = "wasm-peers-signaling-server"
+version = "0.4.0"
+authors = ["Tomasz Karwowski <to.karwowski@gmail.com>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Easy-to-use wrapper for WebRTC DataChannels peer-to-peer connections written in Rust and compiling to WASM."
+#homepage
+repository = "https://github.com/wasm-peers/wasm-peers"
+keywords = ["wasm", "webrtc", "datachannel", "peer-to-peer", "webassembly"]
+categories = ["wasm", "network-programming", "web-programming"]
+readme = "README.md"
+
+[dependencies]
+futures-util = "0.3.21"
+tokio = { version = "1.14.0", features = ["macros", "rt-multi-thread"] }
+tokio-stream = "0.1.8"
+simplelog = "0.12.0"
+log = "0.4.8"
+anyhow = "1"
+
+wasm-peers-protocol = { path = "../protocol", version = "0.3" }
+axum = { version = "0.6.18", features = ["ws", "macros"] }
+rmp = "0.8.11"
+rmp-serde = "1.1.1"
